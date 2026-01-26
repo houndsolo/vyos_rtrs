@@ -14,9 +14,12 @@ module "firewall_groups" {
   providers = {
     vyos = vyos.fw-wan
   }
-  #interface_groups = var.interface_groups
-  #network_groups   = var.network_groups
-  #address_groups   = var.address_groups
+  interface_groups = var.interface_groups
+  interface_includes = var.interface_includes
+  network_groups   = var.network_groups
+  network_includes = var.network_includes
+  address_groups   = var.address_groups
+  address_includes = var.address_includes
 }
 
 module "n100_vrf_config" {
@@ -27,4 +30,3 @@ module "n100_vrf_config" {
   }
   #interface_config = var.interface_config
 }
-
