@@ -20,3 +20,91 @@ variable "vyos_vms" {
   }))
 }
 
+variable "dns" {
+  description = "DNS configuration"
+  type = object({
+    name_servers  = list(string)
+    domain_name   = string
+    domain_search = list(string)
+  })
+  default = {
+    name_servers  = ["10.8.6.9"]
+    domain_name   = "lylat.space"
+    domain_search = ["lylat.space"]
+  }
+}
+
+variable "interface_groups" {
+  type = map(object({
+    description = optional(string)
+    interfaces  = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "interface_includes" {
+  type = map(object({
+    description = optional(string)
+    interfaces  = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "network_groups" {
+  type = map(object({
+    description = optional(string)
+    networks    = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "network_includes" {
+  type = map(object({
+    description = optional(string)
+    interfaces  = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "address_groups" {
+  type = map(object({
+    description = optional(string)
+    address     = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "address_includes" {
+  type = map(object({
+    description = optional(string)
+    interfaces  = optional(list(string), [])
+    includes    = optional(list(string), [])
+  }))
+  default = {}
+}
+
+variable "proxmox_node_ids" {
+  description = "Proxmox node IDs keyed by node name."
+  type = map(object({
+    id        = number
+    cpu_cores = number
+  }))
+  default = {}
+}
+
+variable "pve_api_token" {
+  description = "Proxmox API token for provider authentication."
+  type        = string
+  sensitive   = true
+}
+
+variable "vyos_key" {
+  description = "Vyos API key for provider authentication."
+  type        = string
+  sensitive   = true
+}
