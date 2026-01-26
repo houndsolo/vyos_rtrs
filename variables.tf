@@ -96,15 +96,3 @@ variable "proxmox_node_ids" {
   }))
   default = {}
 }
-
-variable "pve_api_token" {
-  description = "Proxmox API token for provider authentication."
-  type        = string
-  sensitive   = true
-}
-
-variable "vyos_key" {
-  description = "Vyos API key for provider authentication."
-  type        = string
-  sensitive   = true
-}
