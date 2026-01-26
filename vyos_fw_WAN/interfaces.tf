@@ -1,5 +1,4 @@
 resource "vyos_interfaces_ethernet" "lan_trunk" {
-  depends_on = [resource.vyos_vrf_name.guest_vrf]
   identifier = { ethernet = "eth1" }
   description = "lan trunk"
 }
