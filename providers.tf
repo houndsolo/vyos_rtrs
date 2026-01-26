@@ -45,8 +45,8 @@ provider "vyos" {
 }
 
 provider "vyos" {
-  for_each = var.vyos_n100
-  alias = "vyos-n100"
+  for_each = var.vyos_n100s
+  alias = "vyos-n100s"
   endpoint = "https://${each.value.mgmt_addr}"
   api_key  = var.vyos_key
   certificate = {

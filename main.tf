@@ -2,6 +2,8 @@ module "vyos_vms" {
   for_each = var.vyos_vms
   source   = "./vyos_vms"
   vyos_vm = each.value
+  #vyos_vms = var.vyos_vms
+  #vyos_n100s = var.vyos_n100s
   dns     = var.dns
   providers = {
     proxmox = proxmox
@@ -23,10 +25,13 @@ module "firewall_groups" {
 }
 
 module "n100_vrf_config" {
-  for_each = var.vyos_n100
+  for_each = var.vyos_n100s
+  vyos_n100 = each.value
+  vyos_vms = var.vyos_vms
+  #vyos_n100s = var.vyos_n100s
   source = "./vyos_bm_rtrs"
   providers = {
-    vyos = vyos.vyos-n100[each.key]
+    vyos = vyos.vyos-n100s[each.key]
   }
   #interface_config = var.interface_config
 }

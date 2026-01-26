@@ -121,7 +121,7 @@ vyos_vms = {
   }
 }
 
-vyos_n100 = {
+vyos_n100s = {
   vyos_n100_1 = {
     name = "vyos-n100-1"
     mgmt_addr = "10.20.10.1"

@@ -1,4 +1,4 @@
-variable "vyos_n100" {
+variable "vyos_n100s" {
   description = "single vm instance"
   type = map(object({
     name       = string
