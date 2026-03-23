@@ -9,7 +9,5 @@ resource "vyos_interfaces_ethernet_vif" "link_to_VyOS_VM_1" {
     ethernet = "eth1"
     vif = 1111
   }
-  description = "vlan9"
-  address = ["10.9.0.${var.vyos_vm.node_id}/16"]
-  vrf = "lylat_vrf"
+  description = "link_to_VyOS_VM_1"
 }

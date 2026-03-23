@@ -128,10 +128,10 @@ vyos_n100s = {
     mgmt_subnet = "16"
     node_id    = 1
   }
-  #vyos_n100_2 = {
-  #  name = "vyos-n100-2"
-  #  mgmt_addr = "10.20.10.2"
-  #  mgmt_subnet = "16"
-  #  node_id    = 2
-  #}
+  vyos_n100_2 = {
+    name = "vyos-n100-2"
+    mgmt_addr = "10.20.10.2"
+    mgmt_subnet = "16"
+    node_id    = 2
+  }
 }

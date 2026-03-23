@@ -10,6 +10,18 @@ variable "vyos_vm" {
   })
 }
 
+variable "vyos_vms" {
+  description = "All VM instances"
+  type = map(object({
+    node_name  = string
+    vm_id      = number
+    name       = string
+    mgmt_addr  = string
+    mgmt_subnet  = string
+    node_id    = number
+  }))
+}
+
 variable "dns" {
   description = "DNS configuration"
   type = object({

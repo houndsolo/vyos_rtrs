@@ -1,11 +1,11 @@
-variable "vyos_n100s" {
+variable "vyos_n100" {
   description = "BM mini pc"
-  type = map(object({
+  type = object({
     name       = string
     mgmt_addr  = string
     mgmt_subnet  = string
     node_id    = number
-  }))
+  })
 }
 
 variable "vyos_vms" {
@@ -13,6 +13,16 @@ variable "vyos_vms" {
   type = map(object({
     node_name  = string
     vm_id      = number
+    name       = string
+    mgmt_addr  = string
+    mgmt_subnet  = string
+    node_id    = number
+  }))
+}
+
+variable "vyos_n100s" {
+  description = "All BM mini pcs"
+  type = map(object({
     name       = string
     mgmt_addr  = string
     mgmt_subnet  = string

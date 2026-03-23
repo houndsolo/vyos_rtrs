@@ -3,6 +3,9 @@ resource "vyos_interfaces_ethernet" "link_to_BM1" {
   identifier = { ethernet = "eth1" }
   address = ["10.250.${10 + var.vyos_vm.node_id}.1/31"]
   description = "link_to_BM1"
+  lifecycle {
+    ignore_changes = [hw_id,offload]
+  }
 }
 
 resource "vyos_interfaces_ethernet" "link_to_BM2" {
@@ -10,12 +13,18 @@ resource "vyos_interfaces_ethernet" "link_to_BM2" {
   identifier = { ethernet = "eth2" }
   address = ["10.250.${20 + var.vyos_vm.node_id}.1/31"]
   description = "link_to_BM2"
+  lifecycle {
+    ignore_changes = [hw_id,offload]
+  }
 }
 
 resource "vyos_interfaces_ethernet" "lan_trunk" {
   depends_on = [resource.vyos_vrf_name.guest_vrf]
   identifier = { ethernet = "eth3" }
   description = "lan trunk"
+  lifecycle {
+    ignore_changes = [hw_id,offload]
+  }
 }
 
 resource "vyos_interfaces_ethernet_vif" "vlan9" {
