@@ -8,4 +8,5 @@ locals {
     for k, v in var.vyos_nodes : k => v
     if v.platform == "bm"
   }
+
 }
