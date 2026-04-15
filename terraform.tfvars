@@ -1,3 +1,9 @@
+dns = {
+  name_servers  = ["10.8.6.9"]
+  domain_name   = "lylat.space"
+  domain_search = ["lylat.space"]
+}
+
 proxmox_node_ids = {
   fichina = {
     id    = 10
@@ -102,40 +108,42 @@ address_groups = {
   }
 }
 
-vyos_vms = {
+vyos_nodes = {
   vyos_vm_1 = {
     name = "vyos-vm-1"
-    vm_id = 20111
-    node_name = "fichina"
     mgmt_addr = "10.20.10.11"
     mgmt_subnet = "16"
     node_id    = 1
     asn = 501
+    platform = "vm"
+    hypervisor_vm_id = 20111
+    hypervisor_node = "fichina"
   }
   vyos_vm_2 = {
     name = "vyos-vm-2"
-    vm_id = 20112
-    node_name = "zoness"
     mgmt_addr = "10.20.10.12"
     mgmt_subnet = "16"
     node_id    = 2
     asn = 502
+    platform = "vm"
+    hypervisor_vm_id = 20112
+    hypervisor_node = "zoness"
   }
-}
-
-vyos_n100s = {
   vyos_n100_1 = {
-    name = "vyos-n100-1"
+    name = "vyos-rtr-1"
     mgmt_addr = "10.20.10.1"
     mgmt_subnet = "16"
     node_id    = 1
     asn = 401
+    platform = "bm"
   }
   vyos_n100_2 = {
-    name = "vyos-n100-2"
+    name = "vyos-rtr-2"
     mgmt_addr = "10.20.10.2"
     mgmt_subnet = "16"
     node_id    = 2
     asn = 402
+    platform = "bm"
   }
 }
+

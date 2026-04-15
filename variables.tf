@@ -1,25 +1,23 @@
-variable "vyos_n100s" {
-  description = "single vm instance"
-  type = map(object({
-    name       = string
-    mgmt_addr  = string
-    mgmt_subnet  = string
-    node_id    = number
-    asn    = number
-  }))
-}
+variable "vyos_nodes" {
+  description = "All VyOS nodes"
 
-variable "vyos_vms" {
-  description = "single vm instance"
   type = map(object({
-    node_name  = string
-    vm_id      = number
-    name       = string
-    mgmt_addr  = string
-    mgmt_subnet  = string
-    node_id    = number
-    asn    = number
+    name              = string
+    mgmt_addr         = string
+    mgmt_subnet       = string
+    node_id           = number
+    asn               = number
+    platform          = string
+    hypervisor_node   = optional(string)
+    hypervisor_vm_id  = optional(number)
   }))
+
+  validation {
+    condition = alltrue([
+      for n in values(var.vyos_nodes) : contains(["vm", "bm"], n.platform)
+    ])
+    error_message = "Each vyos_nodes entry must have platform set to either \"vm\" or \"bm\"."
+  }
 }
 
 variable "dns" {
@@ -29,11 +27,6 @@ variable "dns" {
     domain_name   = string
     domain_search = list(string)
   })
-  default = {
-    name_servers  = ["10.8.6.9"]
-    domain_name   = "lylat.space"
-    domain_search = ["lylat.space"]
-  }
 }
 
 variable "interface_groups" {

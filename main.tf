@@ -1,34 +1,53 @@
-module "vyos_vms" {
-  for_each = var.vyos_vms
-  source   = "./vyos_vms"
-  vyos_vm = each.value # self
-  vyos_vms = var.vyos_vms # all other VMs
+module "create_vyos_vms" {
+  for_each = local.vm_nodes
+  source   = "./create_vyos_vms"
+
+  node = each.value # self
+  nodes = var.vyos_nodes # all other nodes
+
   dns     = var.dns
   providers = {
     proxmox = proxmox
-    vyos    = vyos.vyos_vms[each.key]
+    vyos    = vyos.vyos_nodes[each.key]
   }
 }
 
-module "n100_vrf_config" {
-  for_each = var.vyos_n100s
-  source = "./vyos_bm_rtrs"
-  vyos_n100 = each.value # self
-  vyos_vms = var.vyos_vms # all vms
-  vyos_n100s = var.vyos_n100s # all other BM
-  providers = {
-    vyos = vyos.vyos_n100s[each.key]
-  }
-  #interface_config = var.interface_config
-}
+#module "vyos_VM_initial_config" {
+#  for_each = var.vyos_vm_nodes
+#  source   = "./vyos_vm_init"
+#
+#  node = each.value # self
+#  vm_nodes = var.vyos_vm_nodes # all other VMs
+#  bm_nodes = var.vyos_bm_nodes # all other BMs
+#
+#  dns     = var.dns
+#  providers = {
+#    proxmox = proxmox
+#    vyos    = vyos.vyos_vm_nodes[each.key]
+#  }
+#}
+#
+#module "vyos_BM_initial_config" {
+#  for_each = var.vyos_bm_nodes
+#  source = "./vyos_bm_init"
+#
+#  node = each.value # self
+#  vm_nodes = var.vyos_vm_nodes # all other VMs
+#  bm_nodes = var.vyos_bm_nodes # all other BMs
+#
+#  dns     = var.dns
+#  providers = {
+#    vyos = vyos.vyos_bm_nodes[each.key]
+#  }
+#}
 
-module "n100_FW_WAN" {
-  source = "./vyos_fw_WAN_no_fw"
-  providers = {
-    vyos = vyos.fw-wan
-  }
-  vyos_n100s = var.vyos_n100s # all other BM
-}
+#module "n100_FW_WAN" {
+#  source = "./vyos_fw_WAN_no_fw"
+#  providers = {
+#    vyos = vyos.fw-wan
+#  }
+#  vyos_n100s = var.vyos_n100s # all other BM
+#}
 
 #module "firewall_groups" {
 #  source = "./vyos_fw_WAN"

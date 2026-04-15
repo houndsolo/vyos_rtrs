@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_vm" "vyos_rtr_vms" {
-  name        = var.vyos_vm.name
+  name        = var.node.name
   description = "managed by opentofu"
   tags        = ["opentofu", "debian", "vyos"]
   started                 = true
@@ -11,8 +11,8 @@ resource "proxmox_virtual_environment_vm" "vyos_rtr_vms" {
   stop_on_destroy         = true
 
 
-  node_name = var.vyos_vm.node_name
-  vm_id     = var.vyos_vm.vm_id
+  node_name = var.node.hypervisor_node
+  vm_id     = var.node.hypervisor_vm_id
 
   agent {
     enabled = true
@@ -36,7 +36,7 @@ resource "proxmox_virtual_environment_vm" "vyos_rtr_vms" {
     user_data_file_id = "cephfs:snippets/vyos_api.yml"
     ip_config {
       ipv4 {
-        address = join("/",[var.vyos_vm.mgmt_addr,var.vyos_vm.mgmt_subnet])
+        address = join("/",[var.node.mgmt_addr,var.node.mgmt_subnet])
       }
     }
   }
@@ -48,19 +48,19 @@ resource "proxmox_virtual_environment_vm" "vyos_rtr_vms" {
     vlan_id = "20"
   }
 
-
+  # hardcoded 2 physical interfaces, going to g0/3, vlans 1111,1112,1121,1122
   network_device {
     disconnected = false
     bridge = "vmbr4001"
     model = "virtio"
-    vlan_id = "${1110 + var.vyos_vm.node_id}"
+    vlan_id = "${1110 + var.node.node_id}"
   }
 
   network_device {
     disconnected = false
     bridge = "vmbr4001"
     model = "virtio"
-    vlan_id = "${1120 + var.vyos_vm.node_id}"
+    vlan_id = "${1120 + var.node.node_id}"
   }
 
   network_device {
