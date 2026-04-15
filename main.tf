@@ -12,21 +12,17 @@ module "create_vyos_vms" {
   }
 }
 
-#module "vyos_VM_initial_config" {
-#  for_each = var.vyos_vm_nodes
-#  source   = "./vyos_vm_init"
-#
-#  node = each.value # self
-#  vm_nodes = var.vyos_vm_nodes # all other VMs
-#  bm_nodes = var.vyos_bm_nodes # all other BMs
-#
-#  dns     = var.dns
-#  providers = {
-#    proxmox = proxmox
-#    vyos    = vyos.vyos_vm_nodes[each.key]
-#  }
-#}
-#
+module "vyos_interface_config" {
+  for_each = var.vyos_nodes
+  source   = "./vyos_interfaces"
+
+  node = each.value # self
+  nodes = var.vyos_nodes # all other nodes
+  providers = {
+    vyos    = vyos.vyos_nodes[each.key]
+  }
+}
+
 #module "vyos_BM_initial_config" {
 #  for_each = var.vyos_bm_nodes
 #  source = "./vyos_bm_init"
