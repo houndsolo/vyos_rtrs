@@ -3,5 +3,12 @@ resource "vyos_protocols_bgp" "bgp_AS_definition" {
 }
 
 resource "vyos_protocols_bgp_neighbor" "bgp_neighbor_BM_to_VM" {
-  identifier = { neighbor = "" }
+  for_each = local.bgp_neighbors
+  identifier = { neighbor = each.value.neighbor_ip }
+  remote_as = each.value.remote_as
+  description = each.value.description
+  address_family = {
+    ipv4_vpn = {
+    }
+  }
 }
