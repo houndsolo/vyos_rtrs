@@ -5,6 +5,7 @@ variable "vyos_n100" {
     mgmt_addr  = string
     mgmt_subnet  = string
     node_id    = number
+    asn    = number
   })
 }
 
@@ -17,6 +18,7 @@ variable "vyos_vms" {
     mgmt_addr  = string
     mgmt_subnet  = string
     node_id    = number
+    asn    = number
   }))
 }
 
@@ -27,5 +29,6 @@ variable "vyos_n100s" {
     mgmt_addr  = string
     mgmt_subnet  = string
     node_id    = number
+    asn    = number
   }))
 }

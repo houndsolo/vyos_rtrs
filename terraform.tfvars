@@ -110,6 +110,7 @@ vyos_vms = {
     mgmt_addr = "10.20.10.11"
     mgmt_subnet = "16"
     node_id    = 1
+    asn = 501
   }
   vyos_vm_2 = {
     name = "vyos-vm-2"
@@ -118,6 +119,7 @@ vyos_vms = {
     mgmt_addr = "10.20.10.12"
     mgmt_subnet = "16"
     node_id    = 2
+    asn = 502
   }
 }
 
@@ -127,11 +129,13 @@ vyos_n100s = {
     mgmt_addr = "10.20.10.1"
     mgmt_subnet = "16"
     node_id    = 1
+    asn = 401
   }
   vyos_n100_2 = {
     name = "vyos-n100-2"
     mgmt_addr = "10.20.10.2"
     mgmt_subnet = "16"
     node_id    = 2
+    asn = 402
   }
 }

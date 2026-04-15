@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source = "local/houndsolo/proxmox"
-      version = "0.89.1"
+      version = "0.100.0"
     }
     vyos = {
       source = "registry.terraform.io/echowings/vyos-rolling"
