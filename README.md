@@ -1,4 +1,4 @@
-This opentofu project is for configuring some VyOS routers. We are using MP-BGP and VPNv4. VyOS currently can only do VPNv4 peering on the default VRF, so this will be our Infra VRF.
+GThis opentofu project is for configuring some VyOS routers. We are using MP-BGP and VPNv4. VyOS currently can only do VPNv4 peering on the default VRF, so this will be our Infra VRF.
 
 Other VRFs are:
 WAN
@@ -88,3 +88,13 @@ variable "ssh_keys" {
   default     = ["ssh-rsa rsa_pubkey"]
 }
 ```
+
+
+
+ToDo
+
+- VRRP setup for 10.9.0.5/16
+- advertising this subnet into lylat_lan VRF on VM routers
+- sharing to BM routers, FW-WAN 
+- test VRRP failure scenerios
+- VXLAN l3 out into lylat_vxlan vrf
