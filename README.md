@@ -2,7 +2,7 @@
 
 This project expects several local-only variables for API authentication and access provisioning. I have gitignored them `passwords.tf`
 
-
+```
 variable "vyos_key" {
   type    = string
   default = "api_key"
@@ -17,4 +17,4 @@ variable "ssh_keys" {
   type        = list
   default     = ["ssh-rsa rsa_pubkey"]
 }
-
+```
