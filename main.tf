@@ -43,8 +43,19 @@ module "vyos_bgp_peering" {
   source   = "./vyos_bgp_peering"
   node = each.value # self
   nodes = var.vyos_nodes # all other nodes
+  vyos_fw_node = var.vyos_fw_node
   providers = {
     vyos    = vyos.vyos_nodes[each.key]
+  }
+}
+
+module "vyos_bgp_peering_fw_wan" {
+  source   = "./vyos_fw_WAN_non_fw"
+  node = var.vyos_fw_node
+  nodes = var.vyos_nodes # all other nodes
+  dns     = var.dns
+  providers = {
+    vyos    = vyos.fw-wan
   }
 }
 

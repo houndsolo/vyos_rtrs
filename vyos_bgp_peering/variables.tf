@@ -40,3 +40,23 @@ variable "nodes" {
   }
 }
 
+variable "vyos_fw_node" {
+  description = "single VyOS node"
+
+  type = object({
+    name              = string
+    mgmt_addr         = string
+    mgmt_subnet       = string
+    node_id           = number
+    asn               = number
+    platform          = string
+    hypervisor_node   = optional(string)
+    hypervisor_vm_id  = optional(number)
+  })
+
+  validation {
+    condition     = contains(["vm", "bm"], var.vyos_fw_node.platform)
+    error_message = "platform must be either \"vm\" or \"bm\"."
+  }
+}
+

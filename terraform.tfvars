@@ -108,6 +108,15 @@ address_groups = {
   }
 }
 
+vyos_fw_node = {
+  name = "vyos-fw-wan"
+  mgmt_addr = "10.20.10.255"
+  mgmt_subnet = "16"
+  node_id    = 255
+  asn = 420
+  platform = "bm"
+}
+
 vyos_nodes = {
   vyos_vm_1 = {
     name = "vyos-vm-1"
