@@ -20,4 +20,3 @@ resource "vyos_interfaces_ethernet" "link_to_VyOS_BM" {
     ignore_changes = [hw_id,offload]
   }
 }
-
